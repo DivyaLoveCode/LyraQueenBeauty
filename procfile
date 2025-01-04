@@ -1,1 +1,2 @@
-web: daphne beautyEcommerce.asgi:application
+web: daphne -u /tmp/daphne.sock beautyEcommerce.asgi:application --bind 0.0.0.0 --port $PORT
+
