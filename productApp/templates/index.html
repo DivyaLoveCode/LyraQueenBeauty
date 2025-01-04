@@ -1,0 +1,580 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="csrf-token" content="{{ csrf_token }}">
+    <title>lyra queen beauty product.</title>
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/fontawesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<link rel="stylesheet" type="text/css" href="{% static 'css/beauty.css' %}">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Kalnia+Glaze:wght@100..700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.css" />
+<link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
+
+</head>
+<body style="background: linear-gradient(to right,#dd5e89,#f7bb97);">
+    <div class="banner" style="background: linear-gradient(to right, rgba(255, 211, 165,0.4), rgba(253, 101, 133, 0.4)), url('{% static 'images/banner1.jpg' %}'); background-size: cover; background-position: center;">
+        <div class="info"><h3>buy 2 and get 1 free offer plus free shipping exclusively for our customers!</h3></div>
+        <nav>
+            <a href="#" class="logo"><img src="{% static 'images/logo.jpg' %}" alt="queen"><br>LyraQueen</a>
+            <!-- Hamburger Menu Icon -->
+            <div class="menu-icon" onclick="toggleMenu()">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+            <ul id="nav-links">
+                <li>
+                    <div class="search">
+                        <form id="search-form" action="{% url 'search' %}" method="GET">
+                            <input type="text" name="query" id="search-bar" placeholder="search your products...">
+                            <button type="submit" id="btn1"><i class="fa fa-search"></i></button>
+                        </form>
+                    </div>
+
+                </li>
+                <li><a href="{% url 'index' %}" class="active">HOME</a></li>
+                <li><a href="{% url 'about' %}">ABOUT US</a></li>
+                <li class="dropdown">
+                    <a href="javascript:void(0)" class="dropbtn">PRODUCTS<i class="fa fa-caret-down" id="pro"></i></a>
+                    <div class="dropdown-content">
+                        <a href="{% url 'lipstick' %}">lipstick</a>
+                        <a href="{% url 'nailpolish' %}">Nail polish</a>
+                        <a href="{% url 'kajol' %}">Kajol</a>
+                        <a href="{% url 'foundation' %}">Foundation</a>
+                        <a href="{% url 'eyeshadow' %}">Eye shadow</a>
+                        <a href="{% url 'kajol' %}">Mascara</a>
+                    </div>
+                </li>
+                <li><a href="{% url 'contact' %}">CONTACT</a></li>
+                {% if user %}
+                        <!-- If the user is logged in, show their name -->
+
+				        <li><span class="welcome-message">Welcome, {{ user.first_name}}</span></li>
+
+                        <li><a href="{% url 'logout' %}" class="logout">Logout</a></li>
+				{% else %}
+                        <li><a href="{% url 'login' %}"><i class="fa-solid fa-user"></i> Login</a></li>
+				{% endif %}
+               <!-- <li><a href="{% url 'signup' %}" class="icon"><i class="fas fa-user"></i></a></li>-->
+                <li><a href="#" class="icon" id="cart-icon" onclick="toggleCart()"><i class="fas fa-shopping-cart"></i>
+                    <span id="cart-item-count">0</span> <!-- Number of items in cart --></a></li>
+            </ul>
+        </nav>
+        <div class="hero-text">
+            <h1 class="anim"><span>Pretty Women</span><br><span> Forever</span></h1>
+            <span>Respect your skin and it will respect you back</span>
+            <p>Lyra Queen beauty products are the best products available in the market.It is completely herbal and suitable to all skin types. Shop now for the latest and trendy products at affordable prices.</p>
+            <a href="#skinpro" type="submit">Shop Now!</a>
+        </div>
+        <div class="image anim">
+            <img src="{% static 'images/beauty1.png' %}">
+            <div class="image-text">20% discount!</div>
+        </div>
+    </div>
+
+
+    <hr style="border-bottom: 3px solid darkgoldenrod;">
+    <div class="second">
+        <h1>Trendy Products</h1>
+        <!-- Slider main container -->
+        <div class="swiper-container">
+            <!-- Additional required wrapper -->
+            <div class="swiper-wrapper">
+                <!-- Slides -->
+                <div class="swiper-slide"><img src="{% static 'images/burple beauty.jpg' %}"></div>
+                <div class="swiper-slide"><img src="{% static 'images/eye makeup1.jpg' %}"></div>
+                <div class="swiper-slide"><img src="{% static 'images/pretty.webp' %}"></div>
+                <div class="swiper-slide"><img src="{% static 'images/Women.jpg '%}"></div>
+                <div class="swiper-slide"><img src="{% static 'images/blush.jpg' %}"></div>
+                <div class="swiper-slide"><img src="{% static 'images/product.jpg'%}"></div>
+                <div class="swiper-slide"><img src="{% static 'images/eye2.jpg' %}"></div>
+            </div>
+  <!-- If we need pagination -->
+  <div class="swiper-pagination"></div>
+
+  <!-- If we need navigation buttons -->
+  <div class="swiper-button-prev"></div>
+  <div class="swiper-button-next"></div>
+
+  
+  </div>
+</div>
+ <section class="product"> 
+        <h2 class="product-category">Best Selling Beauty Products</h2>
+        <button class="pre-btn"><img src="{% static 'images/arrow.png' %}"></button>
+        <button class="nxt-btn"><img src="{% static 'images/arrow.png' %}"></button>
+        <div class="product-container">
+            <div class="product-card">
+                <div class="product-image">
+                    <span class="discount-tag">50% off</span>
+                    <img src="{% static 'images/1.webp' %}" class="product-thumb" >
+                    <button class="card-btn">add to wishlist</button>
+                </div>
+                <div class="product-info">
+                    <h2 class="product-brand">3 in 1 Face Wash</h2>
+                    <p class="product-short-description">Suitable for oily and Dry skin ..</p>
+                    <span class="price">Rs 145</span><span class="actual-price">Rs 180</span>
+                </div>
+            </div>
+            <div class="product-card">
+                <div class="product-image">
+                    <span class="discount-tag">50% off</span>
+                    <img src="{% static 'images/2.webp' %}" class="product-thumb" >
+                    <button class="card-btn">add to wishlist</button>
+                </div>
+                <div class="product-info">
+                    <h2 class="product-brand">Black Mascara</h2>
+                    <p class="product-short-description">Long lasting,waterproof Mascara.</p>
+                    <span class="price">Rs 170</span><span class="actual-price">Rs 199</span>
+                </div>
+            </div>
+            <div class="product-card">
+                <div class="product-image">
+                    <span class="discount-tag">50% off</span>
+                    <img src="{% static 'images/3.webp' %}" class="product-thumb" >
+                    <button class="card-btn">add to wishlist</button>
+                </div>
+                <div class="product-info">
+                    <h2 class="product-brand">Nail Polish Remover</h2>
+                    <p class="product-short-description">Easy to remove nailpolish.</p>
+                    <span class="price">Rs 50</span><span class="actual-price">Rs 80</span>
+                </div>
+            </div>
+            <div class="product-card">
+                <div class="product-image">
+                    <span class="discount-tag">50% off</span>
+                    <img src="{% static 'images/4.jpg' %}" class="product-thumb" >
+                    <button class="card-btn">add to wishlist</button>
+                </div>
+                <div class="product-info">
+                    <h2 class="product-brand">Peach Lip Gloss</h2>
+                    <p class="product-short-description">Healthy long lasting lipgloss</p>
+                    <span class="price">Rs 180</span><span class="actual-price">Rs 200</span>
+                </div>
+            </div>
+            <div class="product-card">
+                <div class="product-image">
+                    <span class="discount-tag">50% off</span>
+                    <img src="{% static 'images/5.webp' %}" class="product-thumb" >
+                    <button class="card-btn">add to wishlist</button>
+                </div>
+                <div class="product-info">
+                    <h2 class="product-brand">Black kajol</h2>
+                    <p class="product-short-description">a short line about the cloth..</p>
+                    <span class="price">Rs 149</span><span class="actual-price">Rs 169</span>
+                </div>
+            </div>
+            <div class="product-card">
+                <div class="product-image">
+                    <span class="discount-tag">50% off</span>
+                    <img src="{% static 'images/7.png' %}" class="product-thumb" >
+                    <button class="card-btn">add to wishlist</button>
+                </div>
+                <div class="product-info">
+                    <h2 class="product-brand">Face Cream</h2>
+                    <p class="product-short-description">Give you healthy and Fresh look..</p>
+                    <span class="price">Rs 110</span><span class="actual-price">Rs 139</span>
+                </div>
+            </div>
+            <div class="product-card">
+                <div class="product-image">
+                    <span class="discount-tag">50% off</span>
+                    <img src="{% static 'images/rose powder.jpg' %}" class="product-thumb" >
+                    <button class="card-btn">add to wishlist</button>
+                </div>
+                <div class="product-info">
+                    <h2 class="product-brand">Rose Powder</h2>
+                    <p class="product-short-description"></p>
+                    <span class="price">Rs 100</span><span class="actual-price">Rs 150</span>
+                </div>
+            </div>
+            <div class="product-card">
+                <div class="product-image">
+                    <span class="discount-tag">50% off</span>
+                    <img src="{% static 'images/9.webp' %}" class="product-thumb" >
+                    <button class="card-btn">add to wishlist</button>
+                </div>
+                <div class="product-info">
+                    <h2 class="product-brand">Red Nailpolish</h2>
+                    <p class="product-short-description">Paint your nail with best nailPolish..</p>
+                    <span class="price">Rs 69</span><span class="actual-price">Rs 80</span>
+                </div>
+            </div>
+            <div class="product-card">
+                <div class="product-image">
+                    <span class="discount-tag">50% off</span>
+                    <img src="{% static 'images/10.jpg' %}" class="product-thumb" alt="">
+                    <button class="card-btn">add to wishlist</button>
+                </div>
+                <div class="product-info">
+                    <h2 class="product-brand">6 Shades EyeShadow</h2>
+                    <p class="product-short-description">Get perfect attractive Eyes..</p>
+                    <span class="price">Rs 139</span><span class="actual-price">Rs 170</span>
+                </div>
+            </div>
+            <div class="product-card">
+                <div class="product-image">
+                    <span class="discount-tag">50% off</span>
+                    <img src="{% static 'images/12.jpg' %}" class="product-thumb" alt="">
+                    <button class="card-btn">add to wishlist</button>
+                </div>
+                <div class="product-info">
+                    <h2 class="product-brand"> 40 SPF Sun Cream</h2>
+                    <p class="product-short-description">Protect your skin from harmful radiation..</p>
+                    <span class="price">Rs 200</span><span class="actual-price">Rs 220</span>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="menu">
+    	<h1>Check out our classy Products</h1>
+    	<div class="menu-link">
+    		<div class="pro-link">
+    			<a href=" #lippro"><img src="{% static 'images/lip3.webp' %}"></a>
+    			<div class="img-text">LipStick</div>
+    		</div>
+    		<div class="pro-link">
+    			<a href="#nailpro"><img src="{% static 'images/nail1.jpg' %}"></a>
+    			<div class="img-text">Nail Polish</div>
+    		</div>
+    		<div class="pro-link">
+    			<a href="#kajolpro"><img src="{% static 'images/kajol1.webp' %}"></a>
+    			<div class="img-text">Kajol</div>
+    		</div>
+    		<div class="pro-link">
+    			<a href="#founpro"><img src="{% static 'images/foundation.jpg' %}"></a>
+    			<div class="img-text">Foundation</div>
+    		</div>
+    		<div class="pro-link">
+    			<a href="#eyepro"><img src="{% static 'images/shadow.jpg' %}"></a>
+    			<div class="img-text">Eye Shadow</div>
+    		</div>
+    	</div>
+        <div id="skinpro">
+    	<h2 class="item1-txt" >Skin Care</h2>
+    	<div class="item1-container" id="skin-care-container">
+    		<div class="skin-care">
+    			<a href="#"><img src="{% static 'images/face wash.jpg' %}"></a>
+    			<div class="skin-txt"><p>Facewash only Rs 80.</p><a href="#" class="btn2">Add to Cart!</a><a href="#" class="btn4" onclick="buyNow()">Buy Now!</a></div>
+    		</div>
+    		<div class="skin-care">
+    			<a href="#"><img src="{% static 'images/face wash2.webp' %}"></a>
+                <div class="skin-txt"><p>turmeric face Wash only Rs120</p><a href="#" class="btn2">Add to Cart!</a><a href="#"  class="btn4" >Buy Now!</a></div>
+    		</div>
+    		<div class="skin-care">
+    			<a href="#"><img src="{% static 'images/scrub.jpg' %}"></a>
+                <div class="skin-txt"><p>Charcoal scrub only Rs188</p><a href="#" class="btn2">Add to Cart!</a><a  class="btn4" >Buy Now!</a></div>
+    		</div>
+    		<div class="skin-care">
+    			<a href="#"><img src="{% static 'images/scrub1.jpg' %}"></a>
+                <div class="skin-txt"><p>Walnut scrub Rs 160.</p><a href="#" class="btn2">Add to Cart!</a><a  class="btn4" >Buy Now!</a></div>
+    		</div>
+    		<div class="skin-care">
+    			<a href="#"><img src="{% static 'images/scrub2.webp' %}"></a>
+    			<div class="skin-txt"><p>Sandalwood scrub only Rs200</p><a href="#" class="btn2">Add to Cart!</a><a class="btn4" >Buy Now!</a></div>
+    		</div>
+    		<div class="skin-care">
+    			<a href="#"><img src="{% static 'images/mask.webp' %}"></a>
+    			<div class="skin-txt"><p>Golden face Mask only Rs199.</p><a href="#" class="btn2">Add to Cart!</a><a class="btn4" >Buy Now!</a></div>
+    		</div>
+
+    		<div class="skin-care">
+    			<a href="#"><img src="{% static 'images/mas.webp' %}"></a>
+    			<div class="skin-txt"><p>Ubatan face mask only Rs122</p><a href="#" class="btn2">Add to Cart!</a><a class="btn4" >Buy Now!</a></div>
+    		</div>
+    		<div class="skin-care">
+    			<a href="#"><img src="{% static 'images/mask1.webp' %}"></a>
+    			<div class="skin-txt"><p>Orange peel mask only Rs150</p><a href="#" class="btn2">Add to Cart!</a><a class="btn4" >Buy Now!</a></div>
+    		</div>
+    		<div class="skin-care">
+    			<a href="#"><img src="{% static 'images/mask2.jpg' %}"></a>
+    			<div class="skin-txt"><p>Saffron face mask only Rs210</p><a href="#" class="btn2">Add to Cart!</a><a class="btn4" >Buy Now!</a></div>
+    		</div>
+
+    	</div>
+        </div>
+        <div id="lippro">
+        <h2 class="item1-txt" >Lipsticks</h2>
+        <div class="item1-container lip" id="lipstick-container">
+            <div class="skin-care">
+                <a href="#"><img src="{% static 'images/lipstick.jpg' %}"></a>
+                <div class="skin-txt"><p>pink lipstick only Rs 110.</p><a href="#" class="btn2">Add to Cart!</a><a class="btn4" >Buy Now!</a></div>
+            </div>
+            <div class="skin-care">
+                <a href="#"><img src="{% static 'images/lipstick1.jpg' %}"></a>
+                <div class="skin-txt"><p> brown lipstick shade only Rs120</p><a href="#" class="btn2">Add to Cart!</a><a class="btn4" >Buy Now!</a></div>
+            </div>
+            <div class="skin-care">
+                <a href="#"><img src="{% static 'images/lipstick pack.jpg' %}"></a>
+                <div class="skin-txt"><p>Lipstick pack 3 shades only Rs250</p><a href="#" class="btn2">Add to Cart!</a><a class="btn4" >Buy Now!</a></div>
+            </div>
+            <div class="skin-care">
+                <a href="#"><img src="{% static 'images/4.jpg' %}"></a>
+                <div class="skin-txt"><p>Peach Lipgloss only Rs190.<p><a href="#" class="btn2">Add to Cart!</a><a class="btn4" >Buy Now!</a></div>
+            </div>
+            <div class="skin-care">
+                <a href="#"><img src="{% static 'images/bright red.webp' %}"></a>
+                <div class="skin-txt"><p>Bright red lipstick only Rs 110.</p><a href="#" class="btn2">Add to Cart!</a><a class="btn4" >Buy Now!</a></div>
+            </div>
+            <div class="skin-care">
+                <a href="#"><img src="{% static 'images/lipstick combo.webp' %}"></a>
+                <div class="skin-txt"><p>3pcs combo lipgloss only Rs 450.</p><a href="#" class="btn2">Add to Cart!</a><a class="btn4" >Buy Now!</a></div>
+            </div>
+
+            <div class="skin-care">
+                <a href=#"><img src="{% static 'images/brown lip.jpg' %}"></a>
+                <div class="skin-txt"><p>Brown liquid lipgloss only Rs 130</p><a href="#" class="btn2">Add to Cart!</a><a class="btn4" >Buy Now!</a></div>
+            </div>
+            <div class="skin-care">
+                <a href="#"><img src="{% static 'images/glitter.jpg' %}"></a>
+                <div class="skin-txt"><p>Red glitter lipstick only Rs300.</p><a href="#" class="btn2">Add to Cart!</a><a class="btn4" >Buy Now!</a></div>
+            </div>
+            <div class="skin-care">
+                <a href="#"><img src="{% static 'images/diamond lip.jpg' %}"></a>
+                <div class="skin-txt"><p>Diamond liquid lipstick only Rs 210.</p><a href="#" class="btn2">Add to Cart!</a><a class="btn4" >Buy Now!</a></div>
+            </div>
+
+        </div>
+        </div>
+
+        <h2 class="item1-txt" id="nailpro">Nail Polish</h2>
+        <div class="item1-container" id="nail-polish-container">
+            <div class="skin-care">
+                <a href="#"><img src="{% static 'images/9.webp' %}"></a>
+                <div class="skin-txt"><p>Lyra Queen red nailpolish only Rs 80.</p><a href="#" class="btn2">Add to Cart!</a><a class="btn4" >Buy Now!</a></div>
+            </div>
+            <div class="skin-care">
+                <a href="#"><img src="{% static 'images/nail1.jpg' %}"></a>
+                <div class="skin-txt"><p> combo nailpolish set only Rs188.</p><a href="#" class="btn2">Add to Cart!</a><a class="btn4" >Buy Now!</a></div>
+            </div>
+            <div class="skin-care">
+                <a href="#"><img src="{% static 'images/combo nail.jpeg' %}"></a>
+                <div class="skin-txt"><p>Multicolor nailpolish combo 3 only Rs150</p><a href="#" class="btn2">Add to Cart!</a><a class="btn4" >Buy Now!</a></div>
+            </div>
+            <div class="skin-care">
+                <a href="#"><img src="{% static 'images/orange nail.jpeg' %}"></a>
+                <div class="skin-txt"><p>Orange shade nailpolish only Rs70.</p><a href="#" class="btn2">Add to Cart!</a><a class="btn4" >Buy Now!</a></div>
+            </div>
+            <div class="skin-care">
+                <a href="#"><img src="{% static 'images/pastel nail.jpg' %}"></a>
+                <div class="skin-txt"><p>Pastel shade nailpolish only Rs90.</p><a href="#" class="btn2">Add to Cart!</a><a class="btn4" >Buy Now!</a></div>
+            </div>
+            <div class="skin-care">
+                <a href="#"><img src="{% static 'images/nail2.webp' %}"></a>
+                <div class="skin-txt"><p>Light green nailpolish only Rs100.</p><a href="#" class="btn2">Add to Cart!</a><a class="btn4" >Buy Now!</a></div>
+            </div>
+
+            <div class="skin-care">
+                <a href="#"><img src="{% static 'images/combo2 nail.webp' %}"></a>
+                <div class="skin-txt"><p>Nailpolish combo of 2 only Rs120</p><a href="#" class="btn2">Add to Cart!</a><a class="btn4" >Buy Now!</a></div>
+            </div>
+            
+
+        </div>
+
+        <h2 class="item1-txt" id="kajolpro">Kajol</h2>
+        <div class="item1-container lip" id="kajol-container">
+            <div class="skin-care">
+                <a href="#"><img src="{% static 'images/5.webp' %}"></a>
+                <div class="skin-txt"><p>Smooth gel black kajol only Rs 150.</p><a href="#" class="btn2">Add to Cart!</a><a class="btn4" >Buy Now!</a></div>
+            </div>
+            <div class="skin-care">
+                <a href="#"><img src="{% static 'images/kajol1.webp' %}"></a>
+                <div class="skin-txt"><p> Dark black kajol only Rs110.</p><a href="#" class="btn2">Add to Cart!</a><a class="btn4" >Buy Now!</a></div>
+            </div>
+            <div class="skin-care">
+                <a href="#"><img src="{% static 'images/eyeliner.webp' %}"></a>
+                <div class="skin-txt"><p>Black gel eyeliner only Rs130.</p><a href="#" class="btn2">Add to Cart!</a><a class="btn4" >Buy Now!</a></div>
+            </div>
+            <div class="skin-care">
+                <a href="#"><img src="{% static 'images/mascara1.jpeg' %}"></a>
+                <div class="skin-txt"><p> Waterproof Mascara only Rs100.</p><a href="#" class="btn2">Add to Cart!</a><a class="btn4" >Buy Now!</a></div>
+            </div>
+            <div class="skin-care">
+                <a href="#"><img src="{% static 'images/mascara.webp' %}"></a>
+                <div class="skin-txt"><p>Combo set of mascara and kajol only Rs160.</p><a href="#" class="btn2">Add to Cart!</a><a class="btn4" >Buy Now!</a></div>
+            </div>
+            <div class="skin-care">
+                <a href="#"><img src="{% static 'images/combo1.webp' %}"></a>
+                <div class="skin-txt"><p>Combo set of 3 mascara only Rs 220.</p><a href="#" class="btn2">Add to Cart!</a><a class="btn4" >Buy Now!</a></div>
+            </div>
+
+            <div class="skin-care">
+                <a href="#"><img src="{% static 'images/kajol2.webp' %}"></a>
+                <div class="skin-txt"><p>Black Kajol Buy One get One Free Rs150</p><a href="#" class="btn2">Add to Cart!</a><a class="btn4" >Buy Now!</a></div>
+            </div>
+            <div class="skin-care">
+                <a href="#"><img src="{% static 'images/combo3.webp' %}"></a>
+                <div class="skin-txt"><p>Buy 3 in 1 combo kajol only Rs250.<p><a href="#" class="btn2">Add to Cart!</a><a class="btn4" >Buy Now!</a></div>
+            </div>
+        </div>
+
+        <h2 class="item1-txt" id="founpro">Foundation</h2>
+        <div class="item1-container" id="foundation-container">
+            <div class="skin-care">
+                <a href="#"><img src="{% static 'images/foundation1.webp' %}"></a>
+                <div class="skin-txt"><p>Liquid foundation only Rs 80.</p><a href="#" class="btn2">Add to Cart!</a><a class="btn4" >Buy Now!</a></div>
+            </div>
+            <div class="skin-care">
+                <a href="#"><img src="{% static 'images/foundation powder.jpeg' %}"></a>
+                <div class="skin-txt"><p>All skin foundation powder only Rs120</p><a href="#" class="btn2">Add to Cart!</a><a class="btn4" >Buy Now!</a></div>
+            </div>
+            <div class="skin-care">
+                <a href="#"><img src="{% static 'images/foundation2.jpg' %}"></a>
+                <div class="skin-txt"><p>Oil free Foundation only Rs188</p><a href="#" class="btn2">Add to Cart!</a><a class="btn4" >Buy Now!</a></div>
+            </div>
+            <div class="skin-care">
+                <a href="#"><img src="{% static 'images/rose powder.jpg' %}"></a>
+                <div class="skin-txt"><p>Rose powder only Rs100.<p><a href="#" class="btn2">Add to Cart!</a><a class="btn4" >Buy Now!</a></div>
+            </div>
+            <div class="skin-care">
+                <a href="#"><img src="{% static 'images/foundation3.jpeg' %}"></a>
+                <div class="skin-txt"><p>Makeup foundation concealer only Rs144</p><a href="#" class="btn2">Add to Cart!</a><a class="btn4" >Buy Now!</a></div>
+            </div>
+            <div class="skin-care">
+                <a href="#"><img src="{% static 'images/combo4.webp' %}"></a>
+                <div class="skin-txt"><p>Combo of foundation,primer & compact only Rs350</p><a href="#" class="btn2">Add to Cart!</a><a class="btn4" >Buy Now!</a></div>
+            </div>
+
+            <div class="skin-care">
+                <a href="#"><img src="{% static 'images/concealer.jpg' %}"></a>
+                <div class="skin-txt"><p>2 in 1 concealer and foundation only Rs180</p><a href="#" class="btn2">Add to Cart!</a><a class="btn4" >Buy Now!</a></div>
+            </div>
+            <div class="skin-care">
+                <a href="#"><img src="{% static 'images/combo5.jpg' %}"></a>
+                <div class="skin-txt"><p>Primer and foundation combo only Rs225<p><a href="#" class="btn2">Add to Cart!</a><a class="btn4" >Buy Now!</a></div>
+            </div>
+        </div>
+
+        <h2 class="item1-txt" id="eyepro">Eye shadow</h2>
+        <div class="item1-container lip" id="eyeshadow-container">
+            <div class="skin-care">
+                <a href="#"><img src="{% static 'images/eyeshadow.jpg' %}"></a>
+                <div class="skin-txt"><p>9 pigmented Eyeshadow palette only Rs223.</p><a href="#" class="btn2">Add to Cart!</a><a class="btn4" >Buy Now!</a></div>
+            </div>
+            <div class="skin-care">
+                <a href="#"><img src="{% static 'images/eyeshadow1.webp' %}"></a>
+                <div class="skin-txt"><p> 6 color Eyeshadow palette only Rs145</p><a href="#" class="btn2">Add to Cart!</a><a class="btn4" >Buy Now!</a></div>
+            </div>
+            <div class="skin-care">
+                <a href="#"><img src="{% static 'images/eyeshadow2.webp' %}"></a>
+                <div class="skin-txt"><p>4 color Eyeshadow palette  only Rs99</p><a href="#" class="btn2">Add to Cart!</a><a class="btn4" >Buy Now!</a></div>
+            </div>
+            <div class="skin-care">
+                <a href="#"><img src="{% static 'images/glitter eyeshadow.jpg' %}"></a>
+                <div class="skin-txt"><p>18 color glittery eyeshadow only Rs165.<p><a href="#" class="btn2">Add to Cart!</a><a class="btn4" >Buy Now!</a></div>
+            </div>
+            <div class="skin-care">
+                <a href="#"><img src="{% static 'images/purple eyeshadow.jpeg' %}"></a>
+                <div class="skin-txt"><p>Single waterproof purple Eyeshadow only Rs50.</p><a href="#" class="btn2">Add to Cart!</a><a class="btn4" >Buy Now!</a></div>
+            </div>
+            <div class="skin-care">
+                <a href="#"><img src="{% static 'images/glitter eyeshadow1.webp' %}"></a>
+                <div class="skin-txt"><p>4 color glitter Eyeshadow palette only Rs80.</p><a href="#" class="btn2">Add to Cart!</a><a class="btn4" >Buy Now!</a></div>
+            </div>
+
+            <div class="skin-care">
+                <a href="#"><img src="{% static 'images/bridal eyeshadow.jpg' %}"></a>
+                <div class="skin-txt"><p>18 color bridal Eyeshadow palette only Rs250</p><a href="#" class="btn2">Add to Cart!</a><a class="btn4" >Buy Now!</a></div>
+            </div>
+            <div class="skin-care">
+                <a href="#"><img src="{% static 'images/eyeshadow3.jpg' %}"></a>
+                <div class="skin-txt"><p>4 glittery shade Eyeshadow only Rs120.</p><a href="#" class="btn2">Add to Cart!</a><a class="btn4" >Buy Now!</a></div>
+            </div>
+        </div>  
+
+
+    </section>
+    <!-- Cart Section (Initially Hidden) -->
+<div id="cart-section" style="display: none;">
+    <!-- Close button -->
+    <button id="cart-close-btn">×</button>
+    
+    <h3>Your Cart</h3>
+    <ul id="cart-items">
+        <!-- Cart items will appear here -->
+    </ul>
+    <div id="total-amount">
+        Total: Rs <span id="total-price">0</span>
+    </div>
+    <button  id="clear-cart">Clear Cart</button>
+    <button  id="buy-cart" class="btn4">Buy Now</button>
+</div>
+
+    <footer>
+        <div class="row">
+            <div class="col"><img src="{% static 'images/logo.jpg' %}" class="logo1">
+                <p class="footext">Welcome to Lyra Queen!</p>
+                <p class="footext">At Lyra Queen, we believe that beauty is more than skin deep. Our journey began with a passion for creating high-quality, effective beauty products that empower individuals to express their unique selves. We understand that every person’s beauty routine is personal, which is why we strive to offer a diverse range of products that cater to all skin types, tones, and preferences.</p>
+            </div>
+            <div class="col"> 
+                <h3>Office <div class="underline"><span></span></div></h3>
+                <p>M G Road</p>
+                <p>Kacheripady,Ernakulam</p>
+                <p>Kerala,PIN 682035</p>
+                <p class="email-id">lyraqueen12@outlook.com</p>
+                <h4>+91 - 0123456789</h4>
+            </div>
+            <div class="col">
+                <h3>Useful Links<div class="underline"><span></span></div></h3>
+                <ul class="link">
+                    <li><a href="{% url 'index' %}">Home</a></li>
+                    <li><a href="#">Services</a></li>
+                    <li><a href="{% url 'about' %}">About Us</a></li>
+                    <li><a href="#">Features</a></li>
+                    <li><a href="{% url 'contact' %}">Contacts</a></li>
+                </ul>
+            </div>
+            <div class="col">
+                <h3>Newsletter<div class="underline"><span></span></div></h3>
+                <form>
+                    <i class="material-icons">email</i>
+                    <input type="email" name="email" placeholder="Enter your Email-id" required>
+                    <button type="submit"><i class="fa fa-sign-in"></i></button>
+                </form>
+                <div class="social-icons">
+                    <a href="#" class="fa fa-facebook"></a>
+                    <a href="#" class="fa fa-twitter"></a>
+                    <a href="#" class="fa fa-instagram"></a>
+                    <a href="#" class="fa fa-pinterest"></a>
+
+                </div>
+            </div>
+        </div>
+        <hr>
+        <p class="copyright">Copyrights @Lyra Queen Beauty Products. All rights Reserved</p>
+    </footer>
+            <script src="https://unpkg.com/swiper/swiper-bundle.js"></script>
+            <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+            <script type="text/javascript">
+                const swiper = new Swiper('.swiper-container', {
+                autoplay:{
+                display:3000,
+                disableOnInteraction:false,},
+                // Optional parameters
+                loop: true,
+                pagination: {
+                el: '.swiper-pagination',
+                clickable:true,},
+                // Navigation arrows
+                navigation: {
+                nextEl: '.swiper-button-next',
+                prevEl: '.swiper-button-prev',
+                },
+                });
+            </script>
+            <script src="{% static 'js/script.js' %}"></script>
+            <script src="{% static 'js/cart.js' %}"></script>
+
+            <script src="{% static 'js/search.js' %}"></script>
+            <script src="{% static 'js/menutoggle.js' %}"></script>
+
+</body>
+</html>

@@ -1,0 +1,218 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="csrf-token" content="{{ csrf_token }}">
+	<title>Nail polish page</title>
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/fontawesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<link rel="stylesheet" type="text/css" href="{% static 'css/beauty.css' %}">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Kalnia+Glaze:wght@100..700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.css" />
+<link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
+</head>
+<body style="background:linear-gradient(to right,#ee9ca7 , #ffdde1);">
+	
+	<div class="info"><h3>buy 2 and get 1 free offer plus free shipping exclusively for our customers!</h3></div>
+	
+				<nav>
+					<a href="#" class="logo"><img src="{% static 'images/logo.jpg' %}" alt="queen"><br>lyraQueen</a>
+                    <!-- Hamburger Menu Icon -->
+                     <div class="menu-icon" onclick="toggleMenu()">
+                        <span class="bar"></span>
+                        <span class="bar"></span>
+                        <span class="bar"></span>
+                    </div>
+					
+					<ul id="nav-links">
+                        <li>
+                            <div class="search">
+                                <form id="search-form" action="{% url 'search' %}" method="GET">
+                                    <input type="text" name="query" id="search-bar" placeholder="search your products...">
+                                    <button type="submit" id="btn1"><i class="fa fa-search"></i></button>
+                                </form>
+                            </div>
+                        </li>
+						<li ><a href="{% url 'index' %}" >HOME</a></li>
+						<li><a href="{% url 'about' %}" >ABOUT US</a></li>
+						<li class="dropdown">
+							<a href="javascript:void(0)" class="dropbtn active" >PRODUCTS<i class="fa fa-caret-down" id="pro"></i></a>
+							<div class="dropdown-content">
+								<a href="{% url 'lipstick' %}">lipstick</a>
+								<a href="[% url 'nailpolish' %}">Nail polish</a>
+								<a href="{% url 'kajol' %}">Kajol</a>
+								<a href="{% url 'foundation' %}">Foundation</a>
+								<a href="{% url 'eyeshadow' %}">Eye shadow</a>
+								<a href="{% url 'kajol' %}">Masscara</a>
+							</div>
+						</li>
+						<li><a href="{% url 'contact' %}">CONTACT</a></li>
+                        {% if user %}
+                        <!-- If the user is logged in, show their name -->
+                        <li><a href="{% url 'logout' %}" class="logout">Logout</a></li>
+                        {% else %}
+                        <li><a href="{% url 'login' %}"><i class="fa-solid fa-user"></i> Login</a></li>
+                        {% endif %}
+						<!--<li><a href="{% url 'signup' %}" class=icon><i class="fas fa-user"></i></a></li>-->
+						<li><a href="#" class="icon" id="cart-icon" onclick="toggleCart()"><i class="fas fa-shopping-cart"></i>
+                         <span id="cart-item-count">0</span> <!-- Number of items in cart --></a></li>
+					</ul>
+				</nav>
+<div class="swiper-container" id="swiper">
+  <!-- Additional required wrapper -->
+  <div class="swiper-wrapper">
+    <!-- Slides -->
+    <div class="swiper-slide fly"><img src="{% static 'images/nail banner5.jpg' %}"></div>
+    <div class="swiper-slide"><img src="{% static 'images/nail banner2.jpeg' %}"></div>
+    <div class="swiper-slide"><img src="{% static 'images/glitter.webp' %}"></div>
+    <div class="swiper-slide"><img src="{% static 'images/nail banner4.webp' %}"></div>
+    <div class="swiper-slide"><img src="{%static 'images/nail.jpeg' %}"></div>
+    <div class="swiper-slide"><img src="{% static 'images/nail banner7.webp' %}"></div>
+    <div class="swiper-slide"><img src="{% static 'images/nail banner6.webp' %}"></div>
+    ...
+  </div>
+  <!-- If we need pagination -->
+  <div class="swiper-pagination"></div>
+
+  <!-- If we need navigation buttons -->
+  <div class="swiper-button-prev"></div>
+  <div class="swiper-button-next"></div>
+  <div class="text">Lyra Queen provide wide collection of Nail Polish!</div>
+</div>
+
+<h1 class="lip-text">Choose Your Favourite Nail Polish</h1>
+<div class="item1-container">
+            <div class="skin-care">
+                <a href="#"><img src="{% static 'images/9.webp' %}"></a>
+                <div class="skin-txt"><p>Lyra Queen red nailpolish only Rs 80.</p><a href="#" class="btn2">Add to Cart!</a><a href="#" class="btn4">Buy Now!</a></div>
+            </div>
+            <div class="skin-care">
+                <a href="#"><img src="{% static 'images/nail1.jpg' %}"></a>
+                <div class="skin-txt"><p> combo nailpolish set only Rs188.</p><a href="#" class="btn2">Add to Cart!</a><a href="#" class="btn4">Buy Now!</a></div>
+            </div>
+            <div class="skin-care">
+                <a href="#"><img src="{% static 'images/combo nail.jpeg' %}"></a>
+                <div class="skin-txt"><p>Multicolor nailpolish combo 3 only Rs150</p><a href="#" class="btn2">Add to Cart!</a><a href="#" class="btn4">Buy Now!</a></div>
+            </div>
+            <div class="skin-care">
+                <a href="#"><img src="{% static 'images/orange nail.jpeg' %}"></a>
+                <div class="skin-txt"><p>Orange shade nailpolish only Rs70.</p><a href="#" class="btn2">Add to Cart!</a><a href="#" class="btn4">Buy Now!</a></div>
+            </div>
+            <div class="skin-care">
+                <a href="#"><img src="{% static 'images/pastel nail.jpg' %}"></a>
+                <div class="skin-txt"><p>Pastel shade nailpolish only Rs90.</p><a href="#" class="btn2">Add to Cart!</a><a href="#" class="btn4">Buy Now!</a></div>
+            </div>
+            <div class="skin-care">
+                <a href="#"><img src="{% static 'images/nail2.webp' %}"></a>
+                <div class="skin-txt"><p>Light green nailpolish only Rs100.</p><a href="#" class="btn2">Add to Cart!</a><a href="#" class="btn4">Buy Now!</a></div>
+            </div>
+
+            <div class="skin-care">
+                <a href="#"><img src="{% static 'images/combo2 nail.webp' %}"></a>
+                <div class="skin-txt"><p>Nailpolish combo of 2 only Rs120</p><a href="#" class="btn2">Add to Cart!</a><a href="#" class="btn4">Buy Now!</a></div>
+            </div>
+            
+
+        </div>
+         <!-- Cart Section (Initially Hidden) -->
+<div id="cart-section" style="display: none;">
+    <!-- Close button -->
+    <button id="cart-close-btn">×</button>
+    
+    <h3>Your Cart</h3>
+    <ul id="cart-items">
+        <!-- Cart items will appear here -->
+    </ul>
+    <div id="total-amount">
+        Total: Rs <span id="total-price">0</span>
+    </div>
+    <button onclick="clearCart()" id="clear-cart">Clear Cart</button>
+    <button  id="buy-cart" class="btn4">Buy Now</button>
+</div>
+        <footer>
+        <div class="row">
+            <div class="col"><img src="{% static 'images/logo.jpg' %}" class="logo1">
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+                tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+                quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+                consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+                cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+                proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+            </div>
+            <div class="col">
+                <h3>Office <div class="underline"><span></span></div></h3>
+                <p>M G Road</p>
+                <p>Kacheripady,Ernakulam</p>
+                <p>Kerala,PIN 682035</p>
+                <p class="email-id">lyraqueen12@outlook.com</p>
+                <h4>+91 - 0123456789</h4>
+            </div>
+            <div class="col">
+                <h3>Useful Links<div class="underline"><span></span></div></h3>
+                <ul class="link">
+                    <li><a href="{% url 'index' %}">Home</a></li>
+                    <li><a href="#">Services</a></li>
+                    <li><a href="{% url 'about' %}">About Us</a></li>
+                    <li><a href="#">Features</a></li>
+                    <li><a href="{% url 'contact' %}">Contacts</a></li>
+                </ul>
+            </div>
+            <div class="col">
+                <h3>Newsletter<div class="underline"><span></span></div></h3>
+                <form>
+                    <i class="material-icons">email</i>
+                    <input type="email" name="" placeholder="Enter your Email-id" required>
+                    <button type="submit"><i class="fa fa-sign-in"></i></button>
+                </form>
+                <div class="social-icons">
+                    <a href="#" class="fa fa-facebook"></a>
+                    <a href="#" class="fa fa-twitter"></a>
+                    <a href="#" class="fa fa-instagram"></a>
+                    <a href="#" class="fa fa-pinterest"></a>
+
+                </div>
+            </div>
+        </div>
+        <hr>
+        <p class="copyright">Copyrights @Lyra Queen Beauty Products. All rights Reserved</p>
+    </footer>
+
+<script src="https://unpkg.com/swiper/swiper-bundle.js"></script>
+<script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+<script type="text/javascript">
+	const swiper = new Swiper('.swiper-container', {
+		autoplay:{
+			display:3000,
+			disableOnInteraction:false,
+		},
+  // Optional parameters
+  
+  loop: true,
+  pagination: {
+    el: '.swiper-pagination',
+    clickable:true,
+  },
+
+  // Navigation arrows
+  navigation: {
+    nextEl: '.swiper-button-next',
+    prevEl: '.swiper-button-prev',
+  },
+
+  
+});
+</script>
+<script src="{% static 'js/cart.js' %}"></script>
+
+<script src="{% static 'js/search.js' %}"></script>
+<script src="{% static 'js/menutoggle.js' %}"></script>
+
+
+</body>
+</html>

@@ -1,0 +1,46 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LyraQueen-Order Success page</title>
+    <link rel="stylesheet" href="{% static 'css/orderForm.css' %}">
+</head>
+<body style="background-image: linear-gradient(-225deg, #FFE29F , #FFA99F , #FF719A );">
+<nav>
+    <a href="#" class="logo"><img src="{% static 'images/logo.jpg' %}" alt="queen"><br>LyraQueen</a>
+    <a href="{% url 'logout' %}" class="logout">Logout</a>
+</nav>
+<div class="place_order">
+    <h1 style="color:#139401;margin-bottom:15px;">Payment Success!</h1>
+    <h2>Thank you for your order!</h2>
+    <p class="para6">Your order has been successfully placed. Here are the details:</p>
+
+    <h3>Order Details</h3>
+    <p><strong>Order ID:</strong> {{ order.id }}</p>
+    <p><strong>Name:</strong> {{ order.name }}</p>
+    <p><strong>Email:</strong> {{ order.email }}</p>
+    <p><strong>Phone:</strong> {{ order.phone }}</p>
+    <p><strong>Address:</strong> {{ order.address }}</p>
+    <p><strong>Zipcode:</strong> {{ order.zipcode }}</p>
+    <p><strong>Total Price:</strong> Rs {{ order.total_price }}</p>
+
+   <!-- <h3 class="order-head">Ordered Items</h3>
+    <ul>
+        {% for item in cart_data %}
+            <li>
+                <img src="{{ item.image }}" alt="{{ item.name }}" width="100"><br>
+                <span>{{ item.name }} - Rs {{ item.price }}</span>
+                <span>Quantity: {{ item.quantity }}</span>
+                <span>Total: Rs {{ item.total_price }}</span>
+            </li>
+        {% endfor %}
+    </ul>-->
+
+
+    <p><a href="{% url 'index' %}">Go back to home</a></p>
+</div>
+
+</body>
+</html>

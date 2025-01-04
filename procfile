@@ -1,0 +1,1 @@
+web: daphne beautyEcommerce.asgi:application

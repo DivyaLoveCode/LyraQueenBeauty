@@ -1,0 +1,89 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>LyraQueen-checkout page</title>
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/fontawesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="{% static 'css/orderForm.css' %}">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Kalnia+Glaze:wght@100..700&display=swap" rel="stylesheet">
+</head>
+<body style="background-image: linear-gradient(-225deg, #FFE29F , #FFA99F , #FF719A );">
+<nav>
+    <a href="#" class="logo"><img src="{% static 'images/logo.jpg' %}" alt="queen"><br>LyraQueen</a>
+    <a href="{% url 'logout' %}" class="logout">Logout</a>
+</nav>
+<div class="checkout-container">
+    <h2>Checkout</h2>
+    <div class="checkout-details">
+        <h3>Product Details</h3>
+        <ul>
+            {% for item in cart_data %}
+                <li>
+                    <img src="{{ item.image }}" alt="{{ item.name }}" width="100"><br>
+                    <span id="detail" style="margin-left:170px;">{{ item.name }} - Rs {{ item.price }}</span>
+                    <span>Quantity: {{ item.quantity }}</span>
+                    <!--<span>Total: Rs {{ item.total_price }}</span>-->
+                </li>
+            {% endfor %}
+        </ul>
+
+        <div class="total-price">
+            <h3>Total: Rs {{ total_price }}</h3>
+        </div>
+        <div class="order-form">
+            <h3>Enter Your Details</h3>
+            <form id="checkout-form" method="POST" action="{% url 'checkout' %}">
+                {% csrf_token %}
+                {% if messages %}
+                <ul>
+                    {% for message in messages %}
+                    <li>{{ message }}</li>
+                    {% endfor %}
+                </ul>
+                {% endif %}
+                <div>
+                    <label for="name">Full Name</label><br>
+                    <input type="text" name="name" id="name" required >
+                </div>
+                <div>
+                    <label for="email">Email</label><br>
+                    <input type="email" name="email" id="email" required >
+                </div>
+                <div>
+                    <label for="phone">Phone</label><br>
+                    <input type="text" name="phone" id="phone" required>
+                </div>
+                <div>
+                    <label for="address">Address</label><br>
+                    <textarea name="address" id="address" required ></textarea>
+                </div>
+                <div>
+                    <label for="zipcode" >Zip Code</label>
+                    <input type="text" name="zipcode" id="zipcode" required >
+                </div>
+                <button type="submit" id="order-now">Order Now</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        // Load cart data from session storage if it's available
+        let cart = JSON.parse(sessionStorage.getItem('cart')) || [];
+
+        // You can further manipulate this data if needed before form submission
+    });
+</script>
+
+
+
+
+</body>
+</html>

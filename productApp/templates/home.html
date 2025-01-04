@@ -1,0 +1,74 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Lyra Queen home page</title>
+	<link rel="stylesheet" type="text/css" href="{% static 'css/beauty.css' %}">
+	<link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.css" />
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
+</head>
+<body>
+	<div class="pack" style="width: 100%;height: 100vh;background: linear-gradient(rgba(247, 74, 132, 0.4),rgba(212, 57, 176, 0.4)),url('{% static 'images/banner.jpg'%}');background-position: center;background-size: cover;background-repeat: no-repeat;position: relative;">
+		<nav class="nav-links">
+			<a href="#" class="logo" id="logo2"><img src="{% static 'images/logo.jpg' %}" alt="queen"><br>LyraQueen</a>
+			<div class="click">
+			<a href="{% url 'signup' %}">Register</a>
+			<a href="{% url 'login' %}">Login</a>
+			</div>
+		</nav>
+		
+		<div>
+			<h1 class="home-head">Welcome to Lyra Queen beauty products!</h1>
+			<p class="home-text">Lyra queen beauty products are the best in market,it stands to the expectation of our Customer.</p>
+			<p class="home-text">To land into the main page of our website and to get the best offer <a href="signup .html">Register Now </a>  itself.</p>
+		</div>
+<div class="swiper-container" id="swiper1">
+  <!-- Additional required wrapper -->
+  <div class="swiper-wrapper">
+    <!-- Slides -->
+    <div class="swiper-slide fly"><img src="{% static 'images/offer.webp' %}"></div>
+    <div class="swiper-slide"><img src="{% static 'images/offer1.webp' %}"></div>
+    <div class="swiper-slide"><img src="{% static 'images/offer2.webp' %}"></div>
+    <div class="swiper-slide"><img src="{% static 'images/offer3.webp' %}"></div>
+    
+    ...
+  </div>
+  <!-- If we need pagination -->
+  <div class="swiper-pagination"></div>
+
+  <!-- If we need navigation buttons -->
+  <div class="swiper-button-prev"></div>
+  <div class="swiper-button-next"></div>
+ </div>
+
+</div>
+<script src="https://unpkg.com/swiper/swiper-bundle.js"></script>
+<script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+<script type="text/javascript">
+	const swiper = new Swiper('.swiper-container', {
+		autoplay:{
+			display:3000,
+			disableOnInteraction:false,
+		},
+  // Optional parameters
+  
+  loop: true,
+  pagination: {
+    el: '.swiper-pagination',
+    clickable:true,
+  },
+
+  // Navigation arrows
+  navigation: {
+    nextEl: '.swiper-button-next',
+    prevEl: '.swiper-button-prev',
+  },
+
+  
+});
+</script>
+
+</body>
+</html>

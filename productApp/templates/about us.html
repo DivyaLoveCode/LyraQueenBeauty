@@ -1,0 +1,163 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="csrf-token" content="{{ csrf_token }}">
+	<title>lyra queen about-us.</title>
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/fontawesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<link rel="stylesheet" type="text/css" href="{% static 'css/beauty.css' %}">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Kalnia+Glaze:wght@100..700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.css" />
+<link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
+</head>
+<body style="background: linear-gradient(to right,#dd5e89 , #f7bb97);">
+    <div class="box" style="width:100%;height:50vh;background:linear-gradient(to right, rgba(255, 211, 165,0.4), rgba(253, 101, 133, 0.4)),url('{% static 'images/beauty banner.png' %}');background-position:center; background-size:cover;position:relative">
+				<div class="info"><h3>buy 2 and get 1 free offer plus free shipping exclusively for our customers!</h3></div>
+				<nav>
+					<a href="#" class="logo"><img src="{% static 'images/logo.jpg' %}" alt="queen"><br>lyraQueen</a>
+                    <!-- Hamburger Menu Icon -->
+                     <div class="menu-icon" onclick="toggleMenu()">
+                        <span class="bar"></span>
+                        <span class="bar"></span>
+                        <span class="bar"></span>
+                    </div>
+                    
+					
+					<ul id="nav-links">
+                        <li>
+                            <div class="search">
+                                <form id="search-form" action="{% url 'search' %}" method="GET">
+                                    <input type="text" name="query" id="search-bar" placeholder="search your products...">
+                                    <button type="submit" id="btn1"><i class="fa fa-search"></i></button>
+                                </form>
+                            </div>
+                        </li>
+						<li ><a href="{% url 'index' %}" >HOME</a></li>
+						<li><a href="{% url 'about' %}" class="active">ABOUT US</a></li>
+						<li class="dropdown">
+							<a href="javascript:void(0)" class="dropbtn" >PRODUCTS<i class="fa fa-caret-down" id="pro"></i></a>
+							<div class="dropdown-content">
+								<a href="{% url 'lipstick' %}">lipstick</a>
+								<a href="{% url 'nailpolish' %}">Nail polish</a>
+								<a href="{% url 'kajol' %}">Kajol</a>
+								<a href="{% url 'foundation' %}">Foundation</a>
+								<a href="{% url 'eyeshadow' %}">Eye shadow</a>
+								<a href="{% url 'kajol' %}">Masscara</a>
+							</div>
+						</li>
+						<li><a href="{% url 'contact' %}">CONTACT</a></li>
+                        {% if user %}
+                        <!-- If the user is logged in, show their name -->
+                        <li><a href="{% url 'logout' %}" class="logout">Logout</a></li>
+                        {% else %}
+                        <li><a href="{% url 'login' %}"><i class="fa-solid fa-user"></i> Login</a></li>
+                        {% endif %}
+						<!--<li><a href="{% url 'signup' %}" class=icon><i class="fas fa-user"></i></a></li>-->
+						<li><a href="#" class="icon" id="cart-icon" onclick="toggleCart()"><i class="fas fa-shopping-cart"></i>
+                         <span id="cart-item-count">0</span> <!-- Number of items in cart --></a></li>
+					</ul>
+				</nav>
+   
+<h1 class="head-text">Unleash Your Inner Beauty</h1>
+   </div>
+
+<hr class="line">
+<div class="row1">
+    <div class="col1">
+        <h2 class="head1">ABOUT US</h2>
+        <p>Welcome to Lyra Queen!</p>
+        <p>At Lyra Queen, we believe that beauty is more than skin deep. Our journey began with a passion for creating high-quality, effective beauty products that empower individuals to express their unique selves. We understand that every person’s beauty routine is personal, which is why we strive to offer a diverse range of products that cater to all skin types, tones, and preferences.</p>
+        <details class="det">
+            <summary>Read More</summary>
+            <h3>Our Mission</h3>
+
+<p>Our mission is to provide innovative beauty solutions that enhance natural beauty while prioritizing skin health and wellness. We carefully select ingredients that are both effective and safe, ensuring that our products are as kind to your skin as they are to the planet.</p>
+
+<h3>Our Commitment</h3>
+
+<p>Sustainability and ethical practices are at the core of what we do. We are committed to using eco-friendly packaging and sourcing ingredients from suppliers who share our values. We believe in transparency, so you can trust that what’s on our labels is what’s in our products.</p>
+<h3>Our Community</h3>
+
+<p>We’re not just a beauty brand; we’re a community. We love connecting with our customers, sharing beauty tips, and celebrating individuality. Follow us on social media to join the conversation and share your beauty journey with us!
+
+Thank you for choosing Lyra Qyeen. We’re excited to be a part of your beauty routine!</p>
+        </details>
+    </div>
+    <div class="col1" id="img2">
+        <img src="{% static 'images/beauty banner3.webp' %}" class="img1">
+    </div>
+</div>
+ <!-- Cart Section (Initially Hidden) -->
+<div id="cart-section" style="display: none;">
+    <!-- Close button -->
+    <button id="cart-close-btn">×</button>
+    
+    <h3>Your Cart</h3>
+    <ul id="cart-items">
+        <!-- Cart items will appear here -->
+    </ul>
+    <div id="total-amount">
+        Total: Rs <span id="total-price">0</span>
+    </div>
+    <button onclick="clearCart()" id="clear-cart">Clear Cart</button>
+    <button  id="buy-cart" class="btn4">Buy Now</button>
+</div>
+ <footer>
+        <div class="row">
+            <div class="col"><img src="{% static 'images/logo.jpg' %}" class="logo1">
+                <p class="footext">Welcome to Lyra Queen!</p>
+                <p class="footext">At Lyra Queen, we believe that beauty is more than skin deep. Our journey began with a passion for creating high-quality, effective beauty products that empower individuals to express their unique selves. We understand that every person’s beauty routine is personal, which is why we strive to offer a diverse range of products that cater to all skin types, tones, and preferences.</p>
+            </div>
+            <div class="col">
+                <h3>Office <div class="underline"><span></span></div></h3>
+                <p>M G Road</p>
+                <p>Kacheripady,Ernakulam</p>
+                <p>Kerala,PIN 682035</p>
+                <p class="email-id">lyraqueen12@outlook.com</p>
+                <h4>+91 - 0123456789</h4>
+            </div>
+            <div class="col">
+                <h3>Useful Links<div class="underline"><span></span></div></h3>
+                <ul class="link">
+                    <li><a href="{% url 'index' %}">Home</a></li>
+                    <li><a href="#">Services</a></li>
+                    <li><a href="{% url 'about' %}">About Us</a></li>
+                    <li><a href="#">Features</a></li>
+                    <li><a href="{% url 'contact' %}">Contacts</a></li>
+                </ul>
+            </div>
+            <div class="col">
+                <h3>Newsletter<div class="underline"><span></span></div></h3>
+                <form>
+                    <i class="material-icons">email</i>
+                    <input type="email" name="email" placeholder="Enter your Email-id" required>
+                    <button type="submit"><i class="fa fa-sign-in"></i></button>
+                </form>
+                <div class="social-icons">
+                    <a href="#" class="fa fa-facebook"></a>
+                    <a href="#" class="fa fa-twitter"></a>
+                    <a href="#" class="fa fa-instagram"></a>
+                    <a href="#" class="fa fa-pinterest"></a>
+
+                </div>
+            </div>
+        </div>
+        <hr>
+        <p class="copyright">Copyrights @Lyra Queen Beauty Products. All rights Reserved</p>
+    </footer>
+    
+<script src="{% static 'js/cart.js' %}"></script>
+
+<script src="{% static 'js/search.js' %}"></script>
+<script src="{% static 'js/menutoggle.js' %}"></script>
+
+
+</body>
+</html>

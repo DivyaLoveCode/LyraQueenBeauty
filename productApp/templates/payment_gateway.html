@@ -1,0 +1,97 @@
+{% load custom_filters %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>LyraQueen-payment-gateway page</title>
+    <link rel="stylesheet" href="{% static 'css/orderForm.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css"  />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/brands.min.css"  />
+</head>
+
+<body style="background-image: linear-gradient(-225deg, #FFE29F , #FFA99F , #FF719A );">
+<nav>
+    <a href="#" class="logo"><img src="{% static 'images/logo.jpg' %}" alt="queen"><br>LyraQueen</a>
+    <a href="{% url 'logout' %}" class="logout">Logout</a>
+</nav>
+<!-- payment_gateway.html -->
+
+<h2 class="payment-head">Payment Gateway</h2>
+
+<p class="payment-para">Order ID: {{ order.id }}</p>
+<p class="payment-para">Total Price: Rs {{ order.total_price }}</p>
+
+<p class="payment-para">Your order is ready to be paid. Please enter your payment details below:</p>
+
+<!-- Razorpay Payment Form -->
+<form action="{% url 'payment-success' order.id %}" method="POST" id="payment-form">
+    {% csrf_token %}
+
+    <!-- Razorpay Checkout Button -->
+    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+    <script type="text/javascript">
+        var options = {
+            "key": "{{ razorpay_key_id }}", // Your Razorpay key ID
+            "amount": {{ order.total_price|multiply:100 }}, // Amount in paise (multiply by 100)
+            "currency": "INR",
+            "order_id": "{{ razorpay_order_id }}", // Razorpay order ID
+            "handler": function (response) {
+                // Handle the successful payment response here
+                var payment_id = response.razorpay_payment_id;
+                var order_id = response.razorpay_order_id;
+                var signature = response.razorpay_signature;
+
+                // Create a hidden form to send payment details to the server
+                var form = document.createElement('form');
+                form.method = 'POST';
+                form.action = "{% url 'payment-success' order.id %}";
+
+                // Append hidden inputs to form
+                var paymentInput = document.createElement('input');
+                paymentInput.type = 'hidden';
+                paymentInput.name = 'razorpay_payment_id';
+                paymentInput.value = payment_id;
+                form.appendChild(paymentInput);
+
+                var orderInput = document.createElement('input');
+                orderInput.type = 'hidden';
+                orderInput.name = 'razorpay_order_id';
+                orderInput.value = order_id;
+                form.appendChild(orderInput);
+
+                var signatureInput = document.createElement('input');
+                signatureInput.type = 'hidden';
+                signatureInput.name = 'razorpay_signature';
+                signatureInput.value = signature;
+                form.appendChild(signatureInput);
+
+                // Add the CSRF token input to the form
+                var csrfInput = document.createElement('input');
+                csrfInput.type = 'hidden';
+                csrfInput.name = 'csrfmiddlewaretoken';
+                csrfInput.value = '{{ csrf_token }}';
+                form.appendChild(csrfInput);
+
+                document.body.appendChild(form);
+                form.submit();
+            },
+            "prefill": {
+                "name": "{{ order.name }}",
+                "email": "{{ order.email }}",
+                "contact": "{{ order.phone }}"
+            },
+            "notes": {
+                "address": "{{ order.address }}"
+            }
+        };
+
+        var rzp1 = new Razorpay(options);
+        rzp1.open();
+    </script>
+</form>
+
+
+
+</body>
+</html>
