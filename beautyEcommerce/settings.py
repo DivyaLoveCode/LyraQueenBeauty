@@ -41,12 +41,12 @@ if not SECRET_KEY:
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
-ALLOWED_HOSTS = ['', 'localhost', '127.0.0.1']
+ALLOWED_HOSTS = ['lyraqueenbeauty.onrender.com', 'localhost', '127.0.0.1']
 
-'''CSRF_TRUSTED_ORIGINS = [
-    '',  # Add your domain here
+CSRF_TRUSTED_ORIGINS = [
+    'https://lyraqueenbeauty.onrender.com',  # Add your domain here
     'https://your-other-trusted-domain.com',
-]'''
+]
 
 # Application definition
 
