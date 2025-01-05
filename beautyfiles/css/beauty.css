@@ -161,7 +161,7 @@ li.dropdown {
 	
 	
 }
-.search-form{
+#search-form{
 border:0;}
 .search{margin-right: 20px;}
 .search input{
@@ -1387,9 +1387,24 @@ font-weight: bold;
 		.home-text{
 			font-size: 15px;
 		}
+	.click a{
+	padding: 8px 15px;
+	margin-left:8px;
+	margin-bottom:8px;
 
 }
 
+}
+@media(max-width:450px){
+.nav-links a{
+display:inline-block;
+padding:8px 10px;
+font-size:16px;
+}
+.click{
+margin-left:170px;
+}
+}
 
 
 /*-----------------responsive design of website--------------*/
@@ -1673,7 +1688,7 @@ nav ul li a {
     .hero-text {
         width: 80%;
         left: 10%;
-        bottom: 10%;
+        top: 60%;
         font-size: 14px;
     }
 
@@ -1687,6 +1702,16 @@ nav ul li a {
 
     nav {
         padding: 10px 5%;
+    }
+    .hero-text .image{
+    display:none;
+    }
+    .image img{
+    visibility:hidden;
+    }
+    .image-text{
+    font-size:11px;
+    padding:10px;
     }
 
     nav ul {
@@ -1710,6 +1735,10 @@ nav ul li a {
         padding: 15px 3%;
         position: relative;
 
+    }
+    /*about us page*/
+    .head-text{
+    top:60%;
     }
     
   }

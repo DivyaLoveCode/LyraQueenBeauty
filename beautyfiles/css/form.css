@@ -261,9 +261,28 @@ button:hover{
 }
 .vessel1{
 	margin-top: 30px;
+	width:100%;
 }
 #wrapper{
 	margin-top: 40px;
+}
+}
+@media(max-width:450px){
+.logo1 img{
+width:45px;
+height:45px;
+}
+.vessel1{
+width:100%;
+margin-top:20px;
+padding:10px 20px;
+}
+.vessel1 h3{
+font-size:20px;
+}
+#wrapper{
+width:100%;
+margin-top:50px;
 }
 }
 
