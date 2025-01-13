@@ -186,11 +186,11 @@ ul li {
     }
 
     .order-form h3 {
-        font-size: 20px;
+        font-size: 35px;
     }
 
     .order-form button {
-        font-size: 14px;
+        font-size: 20px;
     }
 }
 /*-----order-success page style---*/
@@ -332,4 +332,11 @@ text-align:center;
 margin-bottom:6px;
 }
 
+/*checkout page media query*/
+@media (max-width:480px){
+.checkout-container h2{
+font-size:24px;
+}
 
+
+}
