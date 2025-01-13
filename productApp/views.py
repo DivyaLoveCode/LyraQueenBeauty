@@ -160,7 +160,7 @@ def login_view(request):
         if user and user.password == password:  # If user exists and the password matches
             # Store the user ID in session to track the logged-in user
             request.session['user_id'] = user.id
-            messages.success(request, f'Welcome, {user.first_name}!')
+           # messages.success(request, f'Welcome, {user.first_name}!')
             return redirect('index')  # Redirect to the index page after successful login
         else:
             messages.error(request, 'Invalid email or password')  # Error message for incorrect login

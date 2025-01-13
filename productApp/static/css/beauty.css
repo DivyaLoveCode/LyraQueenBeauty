@@ -1740,6 +1740,9 @@ nav ul li a {
         position: relative;
 
     }
+    .item1-container{
+    width:100%;
+    }
     /*about us page*/
     .head-text{
     top:60%;
