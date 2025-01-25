@@ -337,6 +337,9 @@ margin-bottom:6px;
 .checkout-container h2{
 font-size:24px;
 }
+.checkout-details ul{
+width:100%;
+}
 
 
 }
