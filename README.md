@@ -4,7 +4,7 @@
 # DEPLOYED TO:
 ## https://lyraqueenbeautyproduct.onrender.com/
 
-#SCREENSHOT
+# SCREENSHOT
 ![App Screenshot](screenshot/homepage.png)
 ![App Screenshot](screenshot/indexpage.png)
 ![App Screenshot](screenshot/cartpage.png)
@@ -14,10 +14,10 @@
 # Features
 ## User Authentication: Users can sign up, log in, and manage their account through authentication and session management.
 ## Product Display: A variety of beauty products (lipstick, nail polish, foundation, eyeshadow, kajal, mascara) are displayed, with the option to add them to the shopping cart.
-##Cart Management: Users can add products to the cart, view item details such as image, price, and quantity, and proceed to checkout.
-##Checkout & Order Details: Users can fill in shipping details and proceed with purchasing through a Razorpay payment gateway.
-##Order Confirmation: After a successful payment, users are redirected to an order confirmation page with order details and shipping information.
-##Responsive UI: The application is designed to be responsive across different devices.
+## Cart Management: Users can add products to the cart, view item details such as image, price, and quantity, and proceed to checkout.
+## Checkout & Order Details: Users can fill in shipping details and proceed with purchasing through a Razorpay payment gateway.
+## Order Confirmation: After a successful payment, users are redirected to an order confirmation page with order details and shipping information.
+## Responsive UI: The application is designed to be responsive across different devices.
 # Technologies Used
 ## Backend:
 ### Python
